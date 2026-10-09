@@ -1,0 +1,57 @@
+/* Landing page: hero + topic cards (used by overrides/homepage.html) */
+
+.mg-hero {
+  text-align: center;
+  padding: 2.25rem 0 1.25rem;
+}
+
+.mg-hero h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.mg-hero p {
+  max-width: 42rem;
+  margin: 0 auto;
+  opacity: 0.8;
+}
+
+.mg-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2.5rem;
+}
+
+.mg-card {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  border-radius: 0.6rem;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.mg-card:hover,
+.mg-card:focus {
+  border-color: var(--md-primary-fg-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.mg-card-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.mg-card h2 {
+  margin: 0.5rem 0 0.35rem;
+  font-size: 1.15rem;
+}
+
+.mg-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}

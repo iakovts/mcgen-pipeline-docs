@@ -1,0 +1,41 @@
+{#
+  Landing page template — selected via `template: "homepage.html"` front matter
+  in docs/index.md. Renders a hero + clickable topic cards above the page body.
+#}
+{% extends "base.html" %}
+
+{% block content %}
+<section class="mg-hero">
+  {# TODO: align with final site title (zensical.toml: site_name) #}
+  <h1>MG Docs</h1>
+  <p>
+    Study guides, tool instructions, and documentation for the lab's
+    HEP and Monte Carlo pipelines.
+  </p>
+</section>
+
+<div class="mg-cards">
+  <a class="mg-card" href="guides/study-guides/overview/">
+    <span class="mg-card-icon" aria-hidden="true">&#128214;</span>
+    <h2>Study guides</h2>
+    <p>Guides for courses, exams, and topics.</p>
+  </a>
+  <a class="mg-card" href="guides/tool-instructions/overview/">
+    <span class="mg-card-icon" aria-hidden="true">&#129518;</span>
+    <h2>Tool instructions</h2>
+    <p>Step-by-step instructions for common tools.</p>
+  </a>
+  <a class="mg-card" href="pipeline/overview/">
+    <span class="mg-card-icon" aria-hidden="true">&#128300;</span>
+    <h2>Pipeline</h2>
+    <p>hep-pipeline: setup, configuration, and running.</p>
+  </a>
+  <a class="mg-card" href="mg-pipeline/overview/">
+    <span class="mg-card-icon" aria-hidden="true">&#129514;</span>
+    <h2>MG Pipeline</h2>
+    <p>mg-pipeline: cards, CLI, stages, and known quirks.</p>
+  </a>
+</div>
+
+{{ super() }}
+{% endblock %}
