@@ -1,0 +1,96 @@
+# mg-docu-site — Zensical configuration
+# Schema verified 2026-10-09 against Zensical v0.0.69 docs (zensical.org/docs/)
+
+[project]
+site_name = "MG Docs" # TODO: settle final site title
+site_url = "https://example.com" # TODO: real production URL (Plesk origin)
+site_description = "Study guides, tool instructions, and pipeline documentation for the lab."
+docs_dir = "docs"
+site_dir = "site"
+use_directory_urls = true
+
+extra_css = ["stylesheets/extra.css"]
+extra_javascript = [
+  "javascripts/mathjax.js",
+  # TEMPORARY external reference — replace with a self-hosted runtime before
+  # launch (implementation-plan.md, Phase 4 item 13).
+  "https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js",
+]
+
+# Top-level entries become topic tabs (navigation.tabs).
+nav = [
+  { "Home" = "index.md" },
+  { "Guides" = [
+    { "Study guides" = "guides/study-guides/overview.md" },
+    { "Tool instructions" = "guides/tool-instructions/overview.md" },
+  ] },
+  { "Pipeline" = [
+    { "Overview" = "pipeline/overview.md" },
+    { "Getting started" = "pipeline/getting-started.md" },
+    { "Configuration" = "pipeline/configuration.md" },
+    { "How it works" = "pipeline/how-it-works.md" },
+    { "Running" = "pipeline/running.md" },
+    { "Troubleshooting" = "pipeline/troubleshooting.md" },
+  ] },
+  { "MG Pipeline" = [
+    { "Overview" = "mg-pipeline/overview.md" },
+    { "Quickstart" = "mg-pipeline/quickstart.md" },
+    { "Card formats" = "mg-pipeline/card-formats.md" },
+    { "CLI reference" = "mg-pipeline/cli-reference.md" },
+    { "Stage reference" = "mg-pipeline/stage-reference.md" },
+    { "Known quirks" = "mg-pipeline/known-quirks.md" },
+    { "Extending" = "mg-pipeline/extending.md" },
+  ] },
+]
+
+[project.theme]
+language = "en"
+custom_dir = "overrides"
+features = [
+  "navigation.tabs",
+  "navigation.tabs.sticky",
+  "navigation.sections",
+  "navigation.indexes",
+  "navigation.top",
+  "toc.follow",
+  "search.suggest",
+  "search.highlight",
+]
+
+# Light mode
+[[project.theme.palette]]
+scheme = "default"
+primary = "indigo"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+# Dark mode
+[[project.theme.palette]]
+scheme = "slate"
+primary = "indigo"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"
+
+# Language selector — enable when Greek content exists. Plan: one build per
+# language, Greek subtree under /el/ (see dev_notes/implementation-plan.md).
+# [project.extra]
+# alternate = [
+#   { name = "English", link = "/en/", lang = "en" },
+#   { name = "Ελληνικά", link = "/el/", lang = "el" },
+# ]
+
+[project.markdown_extensions]
+admonition = {}
+attr_list = {}
+tables = {}
+toc.permalink = true
+pymdownx.details = {}
+pymdownx.highlight = {}
+pymdownx.emoji.emoji_index = "zensical.extensions.emoji.twemoji"
+pymdownx.emoji.emoji_generator = "zensical.extensions.emoji.to_svg"
+# Math: house syntax \( \) inline, \[ \] or $$ display (MathJax runtime above).
+pymdownx.arithmatex.generic = true
+# Mermaid: native Zensical integration — runtime is auto-initialized.
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
