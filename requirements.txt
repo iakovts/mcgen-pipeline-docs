@@ -1,0 +1,3 @@
+# Docs toolchain — pinned exactly (verified 2026-10-09: latest release).
+# pymdown-extensions arrives pinned as a Zensical dependency; add nothing else casually.
+zensical==0.0.69
