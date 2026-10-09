@@ -1,4 +1,4 @@
-# mcgen-auth-docs
+# mcgen-pipeline-docs
 
 Lab documentation site (study guides, tool instructions, hep-pipeline and
 mg-pipeline docs), built with [Zensical](https://zensical.org/). The build

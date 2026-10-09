@@ -1,6 +1,6 @@
-# Implementation Plan — mcgen-auth-docs (Zensical)
+# Implementation Plan — mcgen-pipeline-docs (Zensical)
 
-> Renamed from `mg-docu-site` (2026-10-09, before first push). Display title: "MC Generation @ AUTH".
+> Renamed from `mg-docu-site` (2026-10-09, before first push). GitHub name: `mcgen-pipeline-docs`. Display title: "MC Generation @ AUTH".
 
 > Status: approved 2026-10-09. Companion to `HANDOFF.md`.
 > This file is the working plan for building the site. Update it as phases complete.
@@ -26,7 +26,7 @@
 ## Progress log
 
 - **2026-10-09** — Plan created. Phases 0–3 executed in the same session (scaffold, config, landing page, math config, IA stubs, smoke test). Awaiting user run-verification.
-- **2026-10-09** — User run-verification passed (math + Mermaid render fine). Rendering checks added to `guides/study-guides/overview.md` and `pipeline/how-it-works.md`. Repo renamed `mg-docu-site` → **`mcgen-auth-docs`** (before first push; display title "MC Generation @ AUTH"). User handles remote/folder rename.
+- **2026-10-09** — User run-verification passed (math + Mermaid render fine). Rendering checks added to `guides/study-guides/overview.md` and `pipeline/how-it-works.md`. Repo renamed `mg-docu-site` → **`mcgen-pipeline-docs`** (final; interim name `mcgen-auth-docs` discarded before first push; display title "MC Generation @ AUTH"). Remote URL updated; user handles folder rename.
 
 ## Steps
 
