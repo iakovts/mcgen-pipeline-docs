@@ -1,0 +1,6 @@
+# Python
+.venv/
+
+# Build output / caches
+site/
+.cache/
