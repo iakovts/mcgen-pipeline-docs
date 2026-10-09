@@ -28,25 +28,25 @@
 ## Steps
 
 ### Phase 0 — Plan into the repo
-- [ ] 0. This plan + `HANDOFF.md` in `dev_notes/`. Commit: "docs: add implementation plan".
+- [x] 0. This plan + `HANDOFF.md` in `dev_notes/`. Commit: "docs: add implementation plan".
 
 ### Phase 1 — Repo hygiene & toolchain
-- [ ] 1. `.gitignore`: `.venv/`, `site/`, `.cache/`. Commit: "chore: add gitignore".
-- [ ] 2. `requirements.txt`: `zensical==0.0.69`. Commit: "chore: pin zensical dependency".
-- [ ] 3. `README.md`: quickstart — venv setup, `zensical serve`, `zensical build --strict`, `--clean` note (pre-1.0 stale-cache quirk), optional `python3 -m http.server -d site`, "site/ is the deliverable". Commit: "docs: add README quickstart".
+- [x] 1. `.gitignore`: `.venv/`, `site/`, `.cache/`. Commit: "chore: add gitignore".
+- [x] 2. `requirements.txt`: `zensical==0.0.69`. Commit: "chore: pin zensical dependency".
+- [x] 3. `README.md`: quickstart — venv setup, `zensical serve`, `zensical build --strict`, `--clean` note (pre-1.0 stale-cache quirk), optional `python3 -m http.server -d site`, "site/ is the deliverable". Commit: "docs: add README quickstart".
 - [ ] **Verify (user):** `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`, then `zensical serve` starts on the skeleton.
 
 ### Phase 2 — Site config & features
-- [ ] 4. `zensical.toml`: `[project]` (site_name/site_url placeholder, `docs_dir`, `site_dir`, `use_directory_urls = true`, `nav` = Home | Guides | Pipeline | MG Pipeline), `[project.theme]` (`language = "en"`, `custom_dir = "overrides"`, features: `navigation.tabs`, `navigation.tabs.sticky`, `navigation.sections`, `navigation.indexes`, `navigation.top`, `toc.follow`, `search.suggest`, `search.highlight`; light/dark palette), `[project.extra]` (commented EN/EL `alternate` dropdown example), `[project.markdown_extensions]` (`admonition`, `attr_list`, `tables`, `toc` w/ permalink, `pymdownx.details`, `pymdownx.highlight`, `pymdownx.emoji` (bundled icon sets, to_svg), `pymdownx.superfences` + mermaid custom fence, `pymdownx.arithmatex.generic = true`). Commit: "feat: add zensical site config".
-- [ ] 5. Landing page: `overrides/homepage.html` (MiniJinja; hero + topic-card grid, selected via `template: "homepage.html"` front matter in `docs/index.md`) + `docs/stylesheets/extra.css` (cards, content width). Commit: "feat: add landing page with topic cards".
-- [ ] 6. Math: `docs/javascripts/mathjax.js` (official Zensical config: `\( \)`/`\[ \]` delimiters + `document$` re-typeset) wired via `extra_javascript` with the MathJax runtime from unpkg — **temporary external reference, revisit self-hosting/KaTeX** (see Decisions). Mermaid needs **no** assets (native). Commit: "feat: add mathjax math support".
+- [x] 4. `zensical.toml`: `[project]` (site_name/site_url placeholder, `docs_dir`, `site_dir`, `use_directory_urls = true`, `nav` = Home | Guides | Pipeline | MG Pipeline), `[project.theme]` (`language = "en"`, `custom_dir = "overrides"`, features: `navigation.tabs`, `navigation.tabs.sticky`, `navigation.sections`, `navigation.indexes`, `navigation.top`, `toc.follow`, `search.suggest`, `search.highlight`; light/dark palette), `[project.extra]` (commented EN/EL `alternate` dropdown example), `[project.markdown_extensions]` (`admonition`, `attr_list`, `tables`, `toc` w/ permalink, `pymdownx.details`, `pymdownx.highlight`, `pymdownx.emoji` (bundled icon sets, to_svg), `pymdownx.superfences` + mermaid custom fence, `pymdownx.arithmatex.generic = true`). Commit: "feat: add zensical site config".
+- [x] 5. Landing page: `overrides/homepage.html` (MiniJinja; hero + topic-card grid, selected via `template: "homepage.html"` front matter in `docs/index.md`) + `docs/stylesheets/extra.css` (cards, content width). Commit: "feat: add landing page with topic cards".
+- [x] 6. Math: `docs/javascripts/mathjax.js` (official Zensical config: `\( \)`/`\[ \]` delimiters + `document$` re-typeset) wired via `extra_javascript` with the MathJax runtime from unpkg — **temporary external reference, revisit self-hosting/KaTeX** (see Decisions). Mermaid needs **no** assets (native). Commit: "feat: add mathjax math support".
 - [ ] **Verify (user):** `zensical serve` → landing cards render and link to topics; topic tabs + section indexes work; dark-mode toggle works; smoke-test math (`\( \)`, `\[ \]`) and Mermaid render.
 
 ### Phase 3 — IA stubs & smoke test
-- [ ] 7. `docs/index.md` hub text + `docs/guides/study-guides/overview.md` + `docs/guides/tool-instructions/overview.md`. Commit: "docs: add guides section stubs".
-- [ ] 8. `docs/pipeline/{overview,getting-started,configuration,how-it-works,running,troubleshooting}.md`. Commit: "docs: add pipeline section stubs".
-- [ ] 9. `docs/mg-pipeline/{overview,quickstart,card-formats,cli-reference,stage-reference,known-quirks,extending}.md`. Commit: "docs: add mg-pipeline section stubs".
-- [ ] 10. `docs/smoke-test.md`: `\( \)` inline + `\[ \]` display math, Mermaid flowchart, searchable headings, admonition. **Delete before public launch.** Commit: "test: add smoke test page".
+- [x] 7. `docs/index.md` hub text + `docs/guides/study-guides/overview.md` + `docs/guides/tool-instructions/overview.md`. Commit: "docs: add guides section stubs".
+- [x] 8. `docs/pipeline/{overview,getting-started,configuration,how-it-works,running,troubleshooting}.md`. Commit: "docs: add pipeline section stubs".
+- [x] 9. `docs/mg-pipeline/{overview,quickstart,card-formats,cli-reference,stage-reference,known-quirks,extending}.md`. Commit: "docs: add mg-pipeline section stubs".
+- [x] 10. `docs/smoke-test.md`: `\( \)` inline + `\[ \]` display math, Mermaid flowchart, searchable headings, admonition. **Delete before public launch.** Commit: "test: add smoke test page".
 - [ ] **Verify (user):** `zensical build --strict` → zero broken links; `zensical serve` → all stubs render, cards→tabs→sections navigate correctly, **Disco search finds smoke-test headings**; grep confirms no content copied from hep-pipeline/mg-pipeline repos.
 
 ### Phase 4 — Stabilization & verdict (FUTURE)
