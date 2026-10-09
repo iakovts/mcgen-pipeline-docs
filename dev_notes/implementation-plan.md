@@ -1,4 +1,6 @@
-# Implementation Plan — mg-docu-site (Zensical)
+# Implementation Plan — mcgen-auth-docs (Zensical)
+
+> Renamed from `mg-docu-site` (2026-10-09, before first push). Display title: "MC Generation @ AUTH".
 
 > Status: approved 2026-10-09. Companion to `HANDOFF.md`.
 > This file is the working plan for building the site. Update it as phases complete.
@@ -24,6 +26,7 @@
 ## Progress log
 
 - **2026-10-09** — Plan created. Phases 0–3 executed in the same session (scaffold, config, landing page, math config, IA stubs, smoke test). Awaiting user run-verification.
+- **2026-10-09** — User run-verification passed (math + Mermaid render fine). Rendering checks added to `guides/study-guides/overview.md` and `pipeline/how-it-works.md`. Repo renamed `mg-docu-site` → **`mcgen-auth-docs`** (before first push; display title "MC Generation @ AUTH"). User handles remote/folder rename.
 
 ## Steps
 
@@ -34,13 +37,13 @@
 - [x] 1. `.gitignore`: `.venv/`, `site/`, `.cache/`. Commit: "chore: add gitignore".
 - [x] 2. `requirements.txt`: `zensical==0.0.69`. Commit: "chore: pin zensical dependency".
 - [x] 3. `README.md`: quickstart — venv setup, `zensical serve`, `zensical build --strict`, `--clean` note (pre-1.0 stale-cache quirk), optional `python3 -m http.server -d site`, "site/ is the deliverable". Commit: "docs: add README quickstart".
-- [ ] **Verify (user):** `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`, then `zensical serve` starts on the skeleton.
+- [x] **Verify (user):** `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`, then `zensical serve` starts on the skeleton.
 
 ### Phase 2 — Site config & features
 - [x] 4. `zensical.toml`: `[project]` (site_name/site_url placeholder, `docs_dir`, `site_dir`, `use_directory_urls = true`, `nav` = Home | Guides | Pipeline | MG Pipeline), `[project.theme]` (`language = "en"`, `custom_dir = "overrides"`, features: `navigation.tabs`, `navigation.tabs.sticky`, `navigation.sections`, `navigation.indexes`, `navigation.top`, `toc.follow`, `search.suggest`, `search.highlight`; light/dark palette), `[project.extra]` (commented EN/EL `alternate` dropdown example), `[project.markdown_extensions]` (`admonition`, `attr_list`, `tables`, `toc` w/ permalink, `pymdownx.details`, `pymdownx.highlight`, `pymdownx.emoji` (bundled icon sets, to_svg), `pymdownx.superfences` + mermaid custom fence, `pymdownx.arithmatex.generic = true`). Commit: "feat: add zensical site config".
 - [x] 5. Landing page: `overrides/homepage.html` (MiniJinja; hero + topic-card grid, selected via `template: "homepage.html"` front matter in `docs/index.md`) + `docs/stylesheets/extra.css` (cards, content width). Commit: "feat: add landing page with topic cards".
 - [x] 6. Math: `docs/javascripts/mathjax.js` (official Zensical config: `\( \)`/`\[ \]` delimiters + `document$` re-typeset) wired via `extra_javascript` with the MathJax runtime from unpkg — **temporary external reference, revisit self-hosting/KaTeX** (see Decisions). Mermaid needs **no** assets (native). Commit: "feat: add mathjax math support".
-- [ ] **Verify (user):** `zensical serve` → landing cards render and link to topics; topic tabs + section indexes work; dark-mode toggle works; smoke-test math (`\( \)`, `\[ \]`) and Mermaid render.
+- [x] **Verify (user):** `zensical serve` → landing cards render and link to topics; topic tabs + section indexes work; dark-mode toggle works; smoke-test math (`\( \)`, `\[ \]`) and Mermaid render.
 
 ### Phase 3 — IA stubs & smoke test
 - [x] 7. `docs/index.md` hub text + `docs/guides/study-guides/overview.md` + `docs/guides/tool-instructions/overview.md`. Commit: "docs: add guides section stubs".

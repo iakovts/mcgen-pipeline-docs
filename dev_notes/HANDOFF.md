@@ -1,4 +1,4 @@
-# mg-docu-site — handoff
+# mcgen-auth-docs — handoff
 
 > Read this first, then `implementation-plan.md` (the working plan/tracklist).
 

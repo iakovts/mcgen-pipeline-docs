@@ -1,10 +1,10 @@
-# mg-docu-site — Zensical configuration
+# mcgen-auth-docs — Zensical configuration
 # Schema verified 2026-10-09 against Zensical v0.0.69 docs (zensical.org/docs/)
 
 [project]
-site_name = "MG Docs" # TODO: settle final site title
+site_name = "MC Generation @ AUTH"
 site_url = "https://example.com" # TODO: real production URL (Plesk origin)
-site_description = "Study guides, tool instructions, and pipeline documentation for the lab."
+site_description = "Documentation for the lab's Monte Carlo event-generation tooling (MadGraph → MadSpin → Pythia → Rivet), plus study guides and tool instructions."
 docs_dir = "docs"
 site_dir = "site"
 use_directory_urls = true
