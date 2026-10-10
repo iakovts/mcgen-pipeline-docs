@@ -5,7 +5,29 @@
 > Status: approved 2026-10-09. Companion to `HANDOFF.md`.
 > This file is the working plan for building the site. Update it as phases complete.
 
-**TL;DR:** Zensical v0.0.69 static docs site for the lab (study guides + tool instructions + hep-pipeline + mg-pipeline docs). Native `zensical.toml` config, new design theme, plain Python venv toolchain (no Docker). **Built-in features only** — Disco search, native Mermaid runtime, bundled pymdown-extensions, theme navigation features. Math via `pymdownx.arithmatex` + MathJax (unpkg for now — revisit, see Decisions). v1 = scaffold + config + IA stubs + smoke test. **No real content yet** (hep-pipeline/mg-pipeline repos not available; stubs = placeholders + TODO markers). `site/` build output = static deliverable for Plesk.
+**TL;DR:** Zensical v0.0.69 static docs site for the lab (study guides + tool instructions + hep-pipeline + mg-pipeline docs). Native `zensical.toml` config, new design theme, plain Python venv toolchain (no Docker). **Built-in features only** — Disco search, native Mermaid runtime, bundled pymdown-extensions, theme navigation features. Math via `pymdownx.arithmatex` + MathJax (unpkg for now — revisit, see Decisions). v1 = scaffold + config + IA stubs + smoke test. **Content pipeline now live (2026-10-10):** tool docs live in the tool repos and are pulled into the site (snippets + provenance) — see “Content sync” below. `site/` build output = static deliverable (GitHub Pages interim, Plesk final).
+
+## Content sync (decided 2026-10-10)
+
+Goal: one site, source-of-truth prose in the tool repos, no drift.
+
+- Each tool repo keeps its prose in `docs/*.md`; its `README.md` is *generated*
+  from them (`scripts/build_readme.py`) and auto-staged via a committed
+  `.githooks/pre-commit` hook (`git config core.hooksPath .githooks`).
+- `scripts/sync_sources.py` copies each sibling repo's `docs/` into
+  `sources/<repo>/docs/` (gitignored) and writes `sources/provenance.json`
+  (commit SHA + date).
+- Site wrapper pages (`docs/pipeline/*`, `docs/mg-pipeline/*`) contain a source
+  note (with `{{ mg_pipeline_sha }}` / `{{ hep_pipeline_env_sha }}` via the
+  native `macros` plugin + `scripts/provenance.py`) and `--8<--` includes
+  (`pymdownx.snippets`, `base_path = ["sources"]`, `check_paths = true`).
+- **Mechanism: copy (not submodules) for now** — the tool repos are still
+  local/unpushed, so local edits appear on re-sync. Intended future swap: git
+  submodules under `sources/`; only `scripts/sync_sources.py` and the CI
+  checkout step change.
+- **Publish:** GitHub Pages via `.github/workflows/docs.yml` (interim), then
+  Plesk. Relative links keep the site portable between the Pages subpath and the
+  future Plesk path.
 
 ## Git / working agreements
 
@@ -27,6 +49,8 @@
 
 - **2026-10-09** — Plan created. Phases 0–3 executed in the same session (scaffold, config, landing page, math config, IA stubs, smoke test). Awaiting user run-verification.
 - **2026-10-09** — User run-verification passed (math + Mermaid render fine). Rendering checks added to `guides/study-guides/overview.md` and `pipeline/how-it-works.md`. Repo renamed `mg-docu-site` → **`mcgen-pipeline-docs`** (final; interim name `mcgen-auth-docs` discarded before first push; display title "MC Generation @ AUTH"). Remote URL updated; user handles folder rename.
+- **2026-10-10** — Content pipeline built (see “Content sync”): added `docs/` to both tool repos with a generated README + shared pre-commit hook; site pulls them via `scripts/sync_sources.py` + `pymdownx.snippets` + `macros` provenance; replaced the 12 placeholder pages with 9 wrapper pages; added `.github/workflows/docs.yml`; set the GitHub Pages `site_url`. Local `zensical build --clean --strict` → *No issues found*. Commits: tool repos `docs: add docs/ as single source; generate README from it`; site `feat: pull source-repo docs into site (snippets + provenance) and add Pages workflow`.
+- **Pending (user):** push both tool repos, merge site `dev` → `main`, enable Pages (Settings → Pages → Source: GitHub Actions).
 
 ## Steps
 
@@ -50,13 +74,14 @@
 - [x] 8. `docs/pipeline/{overview,getting-started,configuration,how-it-works,running,troubleshooting}.md`. Commit: "docs: add pipeline section stubs".
 - [x] 9. `docs/mg-pipeline/{overview,quickstart,card-formats,cli-reference,stage-reference,known-quirks,extending}.md`. Commit: "docs: add mg-pipeline section stubs".
 - [x] 10. `docs/smoke-test.md`: `\( \)` inline + `\[ \]` display math, Mermaid flowchart, searchable headings, admonition. **Delete before public launch.** Commit: "test: add smoke test page".
-- [ ] **Verify (user):** `zensical build --strict` → zero broken links; `zensical serve` → all stubs render, cards→tabs→sections navigate correctly, **Disco search finds smoke-test headings**; grep confirms no content copied from hep-pipeline/mg-pipeline repos.
+- [x] **Verify (local, 2026-10-10):** `zensical build --clean --strict` → *No issues found* (zero broken links). The original “no content copied from the tool repos” check is now **intentionally inverted** — pulling that content is the design (see “Content sync”). The old stubs were removed and replaced by wrapper pages. Remaining user checks: `zensical serve` renders all pages, navigation works, Disco search returns hits.
 
 ### Phase 4 — Stabilization & verdict (FUTURE)
 - [ ] 11. Subpath check: serve `site/` under a `/~username/guides/`-style prefix → CSS/assets/search resolve (validates Plesk subpath hosting).
 - [ ] 12. After 2026-11-05: bump `zensical==0.1.0`, user re-runs the checklist; record verdict in `dev_notes/zensical-comparison.md`; update `auth-docu-site/dev_notes/ssg-comparison.md`. Commit: "chore: upgrade zensical to 0.1.0" + "docs: record zensical verdict".
 - [ ] 13. Math revisit: replace the unpkg MathJax reference with a self-hosted runtime (KaTeX or MathJax) — keep `\( \)`/`\[ \]` syntax so the swap is syntax-compatible. Commit: "feat: self-host math runtime".
-- [ ] 14. Real content from hep-pipeline-env / mg-pipeline (their repos arrive later) + deployment runbook (Plesk push of `site/`).
+- [ ] 14. Deployment runbook (Plesk push of `site/`; switch `site_url` to the Plesk origin).
+- [x] 15. Real content pipeline (2026-10-10): `docs/` in both tool repos + generated READMEs + shared pre-commit hook; site pulls via snippets + `macros` provenance; wrapper pages replace the stubs; GitHub Pages workflow added. (Iterate on content in the tool repos from now on.)
 
 ## Verification (user-run, full checklist)
 
@@ -78,7 +103,8 @@
 - **EN only for now** (`theme.language = "en"`) with a commented `extra.alternate` dropdown example. Eventual EN+Greek content: one build per language, Greek subtree under `/el/` (recommended), dropdown links the two.
 - **No blog**; landing page with topic cards via per-page `template:` front matter + MiniJinja override.
 - **No third-party plugins** — keeps the tree Zensical-native and the MkDocs fallback mechanical.
-- Content policy: all prose lives in this site; pipeline repos' READMEs become pointers later. **No code↔doc sync tooling.**
+- **Content policy — UPDATED 2026-10-10.** Supersedes the old “all prose lives in this site”: tool prose now lives in **its own repo** (`docs/*.md`; README generated from it), and the **site pulls it** (snippets + provenance). This site repo holds the chrome, study guides, and thin wrapper pages. The old “no code↔doc sync tooling” rule is replaced by the sync in “Content sync”.
+- **Publish to GitHub Pages** (interim) via `.github/workflows/docs.yml`; Plesk later. `site_url` stays the Pages URL until the Plesk move. Relative links to stay portable across both.
 
 ## Supply-chain notes
 
@@ -93,5 +119,9 @@
 - `overrides/homepage.html` — landing-page template (topic cards).
 - `docs/index.md` — hub (uses `template: "homepage.html"`).
 - `docs/stylesheets/extra.css`, `docs/javascripts/mathjax.js`.
-- `docs/guides/`, `docs/pipeline/`, `docs/mg-pipeline/`, `docs/smoke-test.md` — stubs.
+- **Content sync:** `scripts/sync_sources.py`, `scripts/provenance.py`,
+  `.github/workflows/docs.yml`, `sources/` (gitignored).
+- Wrapper pages: `docs/pipeline/{overview,apptainer,docker,running-the-pipeline,troubleshooting}.md`,
+  `docs/mg-pipeline/{overview,prerequisites,usage,disclaimer}.md`.
+- Study guides / tool instructions: `docs/guides/`; test page: `docs/smoke-test.md`.
 - `dev_notes/implementation-plan.md` (this file), `dev_notes/HANDOFF.md`.
