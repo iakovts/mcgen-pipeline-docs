@@ -36,6 +36,7 @@ nav = [
   ] },
   { "Guides" = [
     { "Tool instructions" = "guides/tool-instructions/overview.md" },
+    { "Translations / Μεταφράσεις" = "translations.md" },
   ] },
 ]
 

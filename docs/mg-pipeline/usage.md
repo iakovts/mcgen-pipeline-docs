@@ -1,3 +1,5 @@
+How to run a production: choosing stages, resume mode, and the useful flags.
+
 !!! info "Source"
     Pulled from [mg-pipeline](https://github.com/iakovts/mg-pipeline) at commit `{{ mg_pipeline_sha }}` ({{ mg_pipeline_date }}). Edit the source repo, not this page.
 
