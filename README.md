@@ -1,6 +1,6 @@
 # mcgen-pipeline-docs
 
-The lab's documentation site: study guides, tool instructions, and the docs for
+The lab's documentation site: tool instructions and the docs for
 the HEP Software Environment and mg-pipeline tooling. Built with
 [Zensical](https://zensical.org/); the output is a plain static `site/` folder —
 interim hosting is GitHub Pages, the final home is the university's Plesk space.
@@ -15,8 +15,8 @@ Documentation is **owned by the thing it describes**:
   Each repo's `README.md` is *generated* from its `docs/` files by its
   `scripts/build_readme.py` (a shared `.githooks/pre-commit` hook keeps it in
   sync), so every sentence exists in exactly one place.
-- **This repo** is the site: theme, landing page, site-authored study guides /
-  tool instructions (`docs/guides/`), and thin **wrapper pages**
+- **This repo** is the site: theme, landing page, site-authored tool
+  instructions (`docs/guides/`), and thin **wrapper pages**
   (`docs/hep-software-environment/`, `docs/mg-pipeline/`) that pull the tool
   docs in at build time and stamp where they came from.
 
@@ -74,7 +74,7 @@ If a build ever produces stale output (pre-1.0 quirk), run a clean build:
 | `scripts/sync_sources.py` | Stages tool-repo `docs/` into `sources/`; writes provenance |
 | `scripts/provenance.py` | `macros` module: provenance JSON → template variables |
 | `sources/` | Generated build input (gitignored) |
-| `overrides/homepage.html` | Landing-page template (linear "Start here" path + topic cards) |
+| `overrides/homepage.html` | Landing-page template (hero + quickstart text block) |
 | `docs/stylesheets/extra.css` | Site CSS tweaks |
 | `docs/javascripts/mathjax.js` | MathJax config (math is `\( \)` inline / `\[ \]` or `$$` display) |
 | `.github/workflows/docs.yml` | Clones the tool repos, syncs, builds, deploys to Pages

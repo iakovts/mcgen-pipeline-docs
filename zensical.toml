@@ -4,7 +4,7 @@
 [project]
 site_name = "MC Generation @ AUTH"
 site_url = "https://iakovts.github.io/mcgen-pipeline-docs/" # GitHub Pages (interim); switch to the Plesk origin later
-site_description = "Documentation for the lab's Monte Carlo event-generation tooling (MadGraph → MadSpin → Pythia → Rivet), plus study guides and tool instructions."
+site_description = "Documentation for the group's Monte Carlo event-generation tooling (MadGraph → MadSpin → Pythia → Rivet), plus tool instructions."
 docs_dir = "docs"
 site_dir = "site"
 use_directory_urls = true
@@ -35,7 +35,6 @@ nav = [
     { "Disclaimer" = "mg-pipeline/disclaimer.md" },
   ] },
   { "Guides" = [
-    { "Study guides" = "guides/study-guides/overview.md" },
     { "Tool instructions" = "guides/tool-instructions/overview.md" },
   ] },
 ]

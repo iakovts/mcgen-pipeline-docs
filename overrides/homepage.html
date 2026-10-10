@@ -6,82 +6,40 @@
 
 {% block content %}
 <section class="mg-hero">
-  <h1>MC Generation @ AUTH</h1>
+  <h1>MC generation pipeline quickstart</h1>
   <p>
-    Study guides, tool instructions, and documentation for the lab's
-    HEP and Monte Carlo pipelines.
+    Tool instructions and documentation for the group's HEP and Monte Carlo
+    pipelines.
   </p>
 </section>
 
 <h2 id="start-here">Start here</h2>
-<p class="mg-lead">
-  The intended path for new users &mdash; follow the steps in order:
+
+<p>
+  <strong>If you don't have a working environment with MadGraph, MadSpin,
+  Pythia and Rivet installed, start here.</strong> Get a working environment
+  first, then install the pipeline driver:
 </p>
 
-<ol class="mg-path">
-  <li class="mg-step">
-    <a class="mg-step-link" href="hep-software-environment/overview/">
-      <span class="mg-step-num">1</span>
-      <div class="mg-step-body">
-        <h2>Get a development environment</h2>
-        <p>
-          Set up the <strong>HEP Software Environment</strong> &mdash; the
-          MadGraph &rarr; MadSpin &rarr; Pythia &rarr; Rivet stack, on the HPC
-          (Apptainer) or on a workstation (Docker).
-        </p>
-      </div>
-    </a>
+<ul>
+  <li>
+    If you are working in an environment with Apptainer available (e.g. AUTh's
+    Aristotle HPC), see the
+    <a href="hep-software-environment/apptainer/">Apptainer guide</a>.
   </li>
-  <li class="mg-step">
-    <a class="mg-step-link" href="mg-pipeline/overview/">
-      <span class="mg-step-num">2</span>
-      <div class="mg-step-body">
-        <h2>Install and run mg-pipeline</h2>
-        <p>
-          The pipeline driver: give it your config cards and it runs the stages
-          for you. Runs standalone too, if you already have the tools installed
-          &mdash; but we recommend the environment above.
-        </p>
-      </div>
-    </a>
+  <li>
+    If you are working locally on Linux or WSL, see the
+    <a href="hep-software-environment/docker/">Docker installation guide</a>.
   </li>
-  <li class="mg-step">
-    <a class="mg-step-link" href="guides/study-guides/overview/">
-      <span class="mg-step-num">3</span>
-      <div class="mg-step-body">
-        <h2>Learn more</h2>
-        <p>
-          Study guides and tool instructions for going deeper: physics
-          background, cards, stages, and day-to-day workflows.
-        </p>
-      </div>
-    </a>
-  </li>
-</ol>
+</ul>
 
-<h2 id="browse-by-topic">Browse by topic</h2>
-<div class="mg-cards">
-  <a class="mg-card" href="hep-software-environment/overview/">
-    <span class="mg-card-icon" aria-hidden="true">&#128300;</span>
-    <h2>HEP Software Environment</h2>
-    <p>Setup, Docker/Apptainer, running the pipeline, troubleshooting.</p>
-  </a>
-  <a class="mg-card" href="mg-pipeline/overview/">
-    <span class="mg-card-icon" aria-hidden="true">&#129514;</span>
-    <h2>MG Pipeline</h2>
-    <p>Prerequisites, usage, and running stages from config cards.</p>
-  </a>
-  <a class="mg-card" href="guides/study-guides/overview/">
-    <span class="mg-card-icon" aria-hidden="true">&#128214;</span>
-    <h2>Study guides</h2>
-    <p>Guides for courses, exams, and topics.</p>
-  </a>
-  <a class="mg-card" href="guides/tool-instructions/overview/">
-    <span class="mg-card-icon" aria-hidden="true">&#129518;</span>
-    <h2>Tool instructions</h2>
-    <p>Step-by-step instructions for common tools.</p>
-  </a>
-</div>
+<p>
+  When your environment is running, install
+  <a href="mg-pipeline/overview/">mg-pipeline</a> and run your first production.
+  mg-pipeline can also run standalone if the tools are already installed, but
+  the environments above are what we propose. If something goes wrong, see
+  <a href="hep-software-environment/troubleshooting/">troubleshooting</a>.
+</p>
 
 {{ super() }}
 {% endblock %}
