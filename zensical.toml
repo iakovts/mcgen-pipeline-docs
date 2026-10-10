@@ -21,13 +21,7 @@ extra_javascript = [
 # recommended learning path: environment first, then the tool, guides last.
 nav = [
   { "Home" = "index.md" },
-  { "HEP Software Environment" = [
-    { "Overview" = "hep-software-environment/overview.md" },
-    { "Apptainer (HPC)" = "hep-software-environment/apptainer.md" },
-    { "Docker" = "hep-software-environment/docker.md" },
-    { "Running the pipeline" = "hep-software-environment/running-the-pipeline.md" },
-    { "Troubleshooting" = "hep-software-environment/troubleshooting.md" },
-  ] },
+  { "HEP Software Environment" = "hep-software-environment/guide.md" },
   { "MG Pipeline" = "mg-pipeline/guide.md" },
   { "Guides" = [
     { "Tool instructions" = "guides/tool-instructions/overview.md" },
