@@ -45,7 +45,7 @@ holds the site chrome, study guides, and thin wrapper pages.
 - `scripts/sync_sources.py` copies each sibling repo's `docs/` into
   `sources/<repo>/docs/` (gitignored) and records the commit SHA/date in
   `sources/provenance.json`.
-- Site pages under `docs/pipeline/` and `docs/mg-pipeline/` are **wrapper pages**:
+- Site pages under `docs/hep-software-environment/` and `docs/mg-pipeline/` are **wrapper pages**:
   a short "source" note (stamping `{{ mg_pipeline_sha }}` / `{{ hep_pipeline_env_sha }}`
   via the native `macros` plugin + `scripts/provenance.py`) followed by
   `--8<-- "<repo>/docs/<file>.md"` (native `pymdownx.snippets`).
@@ -70,7 +70,8 @@ runs the sync, then `zensical build --clean` and deploys to GitHub Pages.
   `\[ \]` or `$$` display. The MathJax runtime currently loads from unpkg —
   **temporary**; self-hosting/KaTeX is a planned revisit (plan item 13).
 - Landing page: `docs/index.md` uses `template: "homepage.html"` (front matter) →
-  `overrides/homepage.html` (MiniJinja, topic-card grid) + `docs/stylesheets/extra.css`.
+  `overrides/homepage.html` (MiniJinja; linear "Start here" path + topic cards)
+  + `docs/stylesheets/extra.css`.
 - Language: English only (`theme.language = "en"`); commented `extra.alternate`
   dropdown example ready for the eventual EN/EL split (one build per language,
   Greek under `/el/`).

@@ -6,8 +6,8 @@ hide:
   - toc
 ---
 
-Welcome to the lab's documentation site. Use the cards above or the topic tabs
-to switch between sections.
+Welcome to the lab's documentation site. Follow the **Start here** path above
+in order, or use the topic tabs to jump straight to a section.
 
 !!! info "Site under construction"
     Pages currently contain placeholder outlines only — real content is landing

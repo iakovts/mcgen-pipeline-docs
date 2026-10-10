@@ -16,6 +16,80 @@
   opacity: 0.8;
 }
 
+.mg-lead {
+  opacity: 0.85;
+  margin-top: -0.5rem;
+}
+
+/* Linear "Start here" path (ordered steps) */
+.mg-path {
+  list-style: none;
+  margin: 1.25rem 0 2.5rem;
+  padding: 0;
+  counter-reset: mg-step;
+}
+
+.mg-step {
+  position: relative;
+  margin: 0;
+  padding: 0 0 1rem;
+}
+
+/* connector line between steps */
+.mg-step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 1.15rem;
+  top: 2.6rem;
+  bottom: 0;
+  width: 2px;
+  background: rgba(127, 127, 127, 0.35);
+}
+
+.mg-step-link {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  border-radius: 0.6rem;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.mg-step-link:hover,
+.mg-step-link:focus {
+  border-color: var(--md-primary-fg-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.mg-step-num {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.mg-step-body h2 {
+  margin: 0.15rem 0 0.35rem;
+  font-size: 1.15rem;
+}
+
+.mg-step-body p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
 .mg-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

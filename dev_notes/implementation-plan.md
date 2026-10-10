@@ -17,7 +17,7 @@ Goal: one site, source-of-truth prose in the tool repos, no drift.
 - `scripts/sync_sources.py` copies each sibling repo's `docs/` into
   `sources/<repo>/docs/` (gitignored) and writes `sources/provenance.json`
   (commit SHA + date).
-- Site wrapper pages (`docs/pipeline/*`, `docs/mg-pipeline/*`) contain a source
+- Site wrapper pages (`docs/hep-software-environment/*`, `docs/mg-pipeline/*`) contain a source
   note (with `{{ mg_pipeline_sha }}` / `{{ hep_pipeline_env_sha }}` via the
   native `macros` plugin + `scripts/provenance.py`) and `--8<--` includes
   (`pymdownx.snippets`, `base_path = ["sources"]`, `check_paths = true`).
@@ -51,6 +51,7 @@ Goal: one site, source-of-truth prose in the tool repos, no drift.
 - **2026-10-09** — User run-verification passed (math + Mermaid render fine). Rendering checks added to `guides/study-guides/overview.md` and `pipeline/how-it-works.md`. Repo renamed `mg-docu-site` → **`mcgen-pipeline-docs`** (final; interim name `mcgen-auth-docs` discarded before first push; display title "MC Generation @ AUTH"). Remote URL updated; user handles folder rename.
 - **2026-10-10** — Content pipeline built (see “Content sync”): added `docs/` to both tool repos with a generated README + shared pre-commit hook; site pulls them via `scripts/sync_sources.py` + `pymdownx.snippets` + `macros` provenance; replaced the 12 placeholder pages with 9 wrapper pages; added `.github/workflows/docs.yml`; set the GitHub Pages `site_url`. Local `zensical build --clean --strict` → *No issues found*. Commits: tool repos `docs: add docs/ as single source; generate README from it`; site `feat: pull source-repo docs into site (snippets + provenance) and add Pages workflow`.
 - **Pending (user):** push both tool repos, merge site `dev` → `main`, enable Pages (Settings → Pages → Source: GitHub Actions).
+- **2026-10-10** — Iteration 2 (IA + docs): site `README.md` rewritten to explain the content model, `sync_sources.py`, and provenance. Section **"Pipeline" → "HEP Software Environment"** (folder `docs/pipeline/` → `docs/hep-software-environment/`, URLs follow). Landing page is now a **linear "Start here" path** (environment → mg-pipeline → guides) with the cards demoted to a "browse by topic" row; topic tabs reordered to match. Commit: "feat: linear learning path + HEP Software Environment section".
 
 ## Steps
 
@@ -121,7 +122,7 @@ Goal: one site, source-of-truth prose in the tool repos, no drift.
 - `docs/stylesheets/extra.css`, `docs/javascripts/mathjax.js`.
 - **Content sync:** `scripts/sync_sources.py`, `scripts/provenance.py`,
   `.github/workflows/docs.yml`, `sources/` (gitignored).
-- Wrapper pages: `docs/pipeline/{overview,apptainer,docker,running-the-pipeline,troubleshooting}.md`,
+- Wrapper pages: `docs/hep-software-environment/{overview,apptainer,docker,running-the-pipeline,troubleshooting}.md`,
   `docs/mg-pipeline/{overview,prerequisites,usage,disclaimer}.md`.
 - Study guides / tool instructions: `docs/guides/`; test page: `docs/smoke-test.md`.
 - `dev_notes/implementation-plan.md` (this file), `dev_notes/HANDOFF.md`.

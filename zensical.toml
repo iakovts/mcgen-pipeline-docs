@@ -17,25 +17,26 @@ extra_javascript = [
   "https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js",
 ]
 
-# Top-level entries become topic tabs (navigation.tabs).
+# Top-level entries become topic tabs (navigation.tabs). Order follows the
+# recommended learning path: environment first, then the tool, guides last.
 nav = [
   { "Home" = "index.md" },
-  { "Guides" = [
-    { "Study guides" = "guides/study-guides/overview.md" },
-    { "Tool instructions" = "guides/tool-instructions/overview.md" },
-  ] },
-  { "Pipeline" = [
-    { "Overview" = "pipeline/overview.md" },
-    { "Apptainer (HPC)" = "pipeline/apptainer.md" },
-    { "Docker" = "pipeline/docker.md" },
-    { "Running the pipeline" = "pipeline/running-the-pipeline.md" },
-    { "Troubleshooting" = "pipeline/troubleshooting.md" },
+  { "HEP Software Environment" = [
+    { "Overview" = "hep-software-environment/overview.md" },
+    { "Apptainer (HPC)" = "hep-software-environment/apptainer.md" },
+    { "Docker" = "hep-software-environment/docker.md" },
+    { "Running the pipeline" = "hep-software-environment/running-the-pipeline.md" },
+    { "Troubleshooting" = "hep-software-environment/troubleshooting.md" },
   ] },
   { "MG Pipeline" = [
     { "Overview" = "mg-pipeline/overview.md" },
     { "Prerequisites" = "mg-pipeline/prerequisites.md" },
     { "Usage" = "mg-pipeline/usage.md" },
     { "Disclaimer" = "mg-pipeline/disclaimer.md" },
+  ] },
+  { "Guides" = [
+    { "Study guides" = "guides/study-guides/overview.md" },
+    { "Tool instructions" = "guides/tool-instructions/overview.md" },
   ] },
 ]
 
