@@ -1,15 +1,4 @@
-# Overview
+!!! info "Source"
+    Pulled from [hep-pipeline-env](https://github.com/iakovts/hep-pipeline-env) at commit `{{ hep_pipeline_env_sha }}` ({{ hep_pipeline_env_date }}). Edit the source repo, not this page.
 
-What the hep-pipeline is, what problems it solves, and where it fits in the lab
-workflow.
-
-!!! note "TODO — content pending"
-    Placeholder outline — no content has been copied from the hep-pipeline repo.
-    Real content lands in a later phase.
-
-## Outline
-
-- Purpose and scope
-- High-level architecture
-- Where it fits in the lab workflow
-- Related: [MG Pipeline](../mg-pipeline/overview.md)
+--8<-- "hep-pipeline-env/docs/index.md"

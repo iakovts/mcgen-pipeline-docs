@@ -1,15 +1,4 @@
-# Overview
+!!! info "Source"
+    Pulled from [mg-pipeline](https://github.com/iakovts/mg-pipeline) at commit `{{ mg_pipeline_sha }}` ({{ mg_pipeline_date }}). Edit the source repo, not this page.
 
-What mg-pipeline is, what problems it solves, and where it fits in the lab
-workflow.
-
-!!! note "TODO — content pending"
-    Placeholder outline — no content has been copied from the mg-pipeline repo.
-    Real content lands in a later phase.
-
-## Outline
-
-- Purpose and scope
-- High-level architecture
-- Where it fits in the lab workflow
-- Related: [Pipeline](../pipeline/overview.md)
+--8<-- "mg-pipeline/docs/index.md"
