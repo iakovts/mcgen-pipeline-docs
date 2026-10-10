@@ -16,28 +16,37 @@
 <h2 id="start-here">Start here</h2>
 
 <p>
-  <strong>If you don't have a working environment with MadGraph, MadSpin,
-  Pythia and Rivet installed, start here.</strong> Get a working environment
-  first, then install the pipeline driver:
+  Two steps take you from nothing to a running pipeline. If you already have a
+  working MadGraph / MadSpin / Pythia / Rivet environment, skip straight to
+  step 2.
 </p>
 
-<ul>
+<ol>
   <li>
-    If you are working in an environment with Apptainer available (e.g. AUTh's
-    Aristotle HPC), see the
-    <a href="hep-software-environment/guide/#apptainer-hpc">Apptainer guide</a>.
+    <strong>Get a software environment.</strong> If MadGraph, MadSpin, Pythia
+    and Rivet are not installed yet, set up the
+    <a href="hep-software-environment/guide/">HEP Software Environment</a>:
+    <ul>
+      <li>
+        on an HPC cluster with Apptainer (e.g. AUTh's Aristotle) —
+        <a href="hep-software-environment/guide/#apptainer-hpc">Apptainer guide</a>;
+      </li>
+      <li>
+        locally on Linux or WSL —
+        <a href="hep-software-environment/guide/#docker">Docker guide</a>.
+      </li>
+    </ul>
   </li>
   <li>
-    If you are working locally on Linux or WSL, see the
-    <a href="hep-software-environment/guide/#docker">Docker installation guide</a>.
+    <strong>Install and run mg-pipeline.</strong> Once the environment is ready
+    (or if you already have one), follow the
+    <a href="mg-pipeline/guide/">mg-pipeline guide</a> to run your first
+    production.
   </li>
-</ul>
+</ol>
 
 <p>
-  When your environment is running, install
-  <a href="mg-pipeline/guide/">mg-pipeline</a> and run your first production.
-  mg-pipeline can also run standalone if the tools are already installed, but
-  the environments above are what we propose. If something goes wrong, see
+  Something not working? See
   <a href="hep-software-environment/guide/#troubleshooting">troubleshooting</a>.
 </p>
 

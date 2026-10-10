@@ -10,12 +10,17 @@ are already on your system.
 
 --8<-- "mg-pipeline/docs/index.md"
 
+<!-- Include the '## Prerequisites' heading alone, then the note, then the body,
+     so the note sits directly under the heading. If prerequisites.md gains lines
+     before the heading, adjust these line numbers. -->
+--8<-- "mg-pipeline/docs/prerequisites.md:1:1"
+
 !!! tip "Already installed the tools? Skip the prerequisites"
     If you got MadGraph, MadSpin, Pythia and Rivet through one of the environment
     methods in [Step 1](../hep-software-environment/guide.md), the prerequisites
-    below are already satisfied — **skip ahead to Usage**.
+    are already satisfied — **skip ahead to Usage**.
 
---8<-- "mg-pipeline/docs/prerequisites.md"
+--8<-- "mg-pipeline/docs/prerequisites.md:2"
 
 --8<-- "mg-pipeline/docs/usage.md"
 
