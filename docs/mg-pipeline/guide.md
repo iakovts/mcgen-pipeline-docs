@@ -18,7 +18,10 @@ are already on your system.
 !!! tip "Already installed the tools? Skip the prerequisites"
     If you got MadGraph, MadSpin, Pythia and Rivet through one of the environment
     methods in [Step 1](../hep-software-environment/guide.md), the prerequisites
-    are already satisfied — **skip ahead to Usage**.
+    are already satisfied — **skip ahead to Usage**. Your layout will look
+    **similar but not exactly** like the example below: the tool directories
+    carry version numbers (e.g. `MG5_aMC_v3_5_13`) and mg-pipeline auto-detects
+    them at runtime, so you don't have to match the tree precisely.
 
 --8<-- "mg-pipeline/docs/prerequisites.md:2"
 
