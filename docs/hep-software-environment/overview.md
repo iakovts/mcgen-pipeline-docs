@@ -1,6 +1,6 @@
 This is **Step 1** of the quickstart: getting a working environment with
 MadGraph, MadSpin, Pythia and Rivet. **If you already have one, skip to
-[Step 2 — MG Pipeline](../mg-pipeline/overview.md).**
+[Step 2 — MG Pipeline](../mg-pipeline/guide.md).**
 
 `hep-pipeline-env` gives you two ways to get an environment — pick the one that
 matches where you work, then continue to

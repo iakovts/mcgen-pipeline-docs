@@ -28,12 +28,7 @@ nav = [
     { "Running the pipeline" = "hep-software-environment/running-the-pipeline.md" },
     { "Troubleshooting" = "hep-software-environment/troubleshooting.md" },
   ] },
-  { "MG Pipeline" = [
-    { "Overview" = "mg-pipeline/overview.md" },
-    { "Prerequisites" = "mg-pipeline/prerequisites.md" },
-    { "Usage" = "mg-pipeline/usage.md" },
-    { "Disclaimer" = "mg-pipeline/disclaimer.md" },
-  ] },
+  { "MG Pipeline" = "mg-pipeline/guide.md" },
   { "Guides" = [
     { "Tool instructions" = "guides/tool-instructions/overview.md" },
     { "Translations / Μεταφράσεις" = "translations.md" },

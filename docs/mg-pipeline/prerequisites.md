@@ -1,7 +1,0 @@
-What mg-pipeline expects to find on disk, and how it locates the tools at
-runtime. See also [Usage](usage.md) for running it.
-
-!!! info "Source"
-    Pulled from [mg-pipeline](https://github.com/iakovts/mg-pipeline) at commit `{{ mg_pipeline_sha }}` ({{ mg_pipeline_date }}). Edit the source repo, not this page.
-
---8<-- "mg-pipeline/docs/prerequisites.md"
