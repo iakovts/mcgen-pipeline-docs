@@ -9,31 +9,34 @@ interim hosting is GitHub Pages, the final home is the university's Plesk space.
 
 Documentation is **owned by the thing it describes**:
 
-- Tool docs live in each tool's repo under `docs/`:
-  [mg-pipeline](https://github.com/iakovts/mg-pipeline) and
+- Each tool repo is **one big `README.md`** (short intro → table of contents →
+  the full guide):
+  [mg-pipeline](https://github.com/iakovts/mg-pipeline),
   [hep-pipeline-env](https://github.com/iakovts/hep-pipeline-env).
-  Each repo's `README.md` is *generated* from its `docs/` files by its
-  `scripts/build_readme.py` (a shared `.githooks/pre-commit` hook keeps it in
-  sync), so every sentence exists in exactly one place.
+  That README is the single source of truth — GitHub shows it, and this site
+  includes it. No copies, no generator, no hooks: **drift is impossible**.
 - **This repo** is the site: theme, landing page, site-authored tool
   instructions (`docs/guides/`), and thin **wrapper pages**
-  (`docs/hep-software-environment/`, `docs/mg-pipeline/`) that pull the tool
-  docs in at build time and stamp where they came from.
+  (`docs/hep-software-environment/`, `docs/mg-pipeline/`) that include the
+  READMEs at build time and stamp where they came from.
 
-To fix or extend tool documentation: edit the tool repo, re-run the sync below,
-rebuild. Never edit a wrapper page's body.
+To fix or extend tool documentation: edit the tool repo's `README.md`, re-run
+the sync below, rebuild. Never edit a wrapper page's body.
 
 ### What `scripts/sync_sources.py` does
 
 1. Looks for the two tool repos as **siblings** of this repo
    (`../mg-pipeline-main` or `../mg-pipeline`; `../hep-pipeline-env-main` or
    `../hep-pipeline-env`).
-2. Copies each repo's `docs/` into `sources/<repo>/docs/` — `sources/` is
-   gitignored: it is a build input, regenerated every time.
+2. Copies each repo's `README.md` into `sources/<repo>/README.md` — `sources/`
+   is gitignored: it is a build input, regenerated every time.
 3. Records each repo's commit SHA and date in `sources/provenance.json`.
 
-The site then includes those files with `pymdownx.snippets` (`--8<--` notation).
-Nothing under `sources/` is served raw; only the pages that include it.
+The site then includes README **sections** with `pymdownx.snippets`
+(`--8<-- "<repo>/README.md:section"`). The sections are bracketed by invisible
+HTML-comment markers (`<!-- --8<-- [start:x] -->`) in each README — that's how
+the site can insert its own intro/notes between sections. Nothing under
+`sources/` is served raw; only the pages that include it.
 
 ### What "provenance" means
 

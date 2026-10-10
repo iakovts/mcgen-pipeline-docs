@@ -11,9 +11,9 @@
 
 Goal: one site, source-of-truth prose in the tool repos, no drift.
 
-- Each tool repo keeps its prose in `docs/*.md`; its `README.md` is *generated*
-  from them (`scripts/build_readme.py`) and auto-staged via a committed
-  `.githooks/pre-commit` hook (`git config core.hooksPath .githooks`).
+- Each tool repo is **one big `README.md`** (short intro → `## Contents` TOC →
+  full guide) — the single source of truth for its docs. GitHub shows it; the
+  site includes it. No generator, no hooks: drift is impossible.
 - `scripts/sync_sources.py` copies each sibling repo's `docs/` into
   `sources/<repo>/docs/` (gitignored) and writes `sources/provenance.json`
   (commit SHA + date).
@@ -55,7 +55,8 @@ Goal: one site, source-of-truth prose in the tool repos, no drift.
 - **2026-10-10** — Iteration 3 (landing page): hero → **"MC generation pipeline quickstart"**; the step-path cards replaced by a short orientation text (no env yet → start here; Apptainer vs Docker entry points; then mg-pipeline; troubleshooting). **"Browse by topic" removed**; **study guides dropped** from the site for now (nav entry + `docs/guides/study-guides/` removed; copy updated). Commit: "feat: simplify landing page to quickstart text".
 - **2026-10-10** — Iteration 4 (repo fixes): real `mg-pipeline` repo URL everywhere in hep-pipeline-env; auto-clone re-enabled then made **optional-but-default** (`CLONE_MG_PIPELINE=0` / `--no-mg-pipeline`); Mermaid diagram fixed for GitHub (no `<br/>`/`&amp;` in labels). Commits: `mg-pipeline` `87a9f76`, `hep-pipeline-env` `1ced309`, `fbcfe0b`.
 - **2026-10-10** — Iteration 5 (coherence + i18n groundwork): every wrapper page now carries a **site-authored step frame / intro** (Step 1 = environment, Step 2 = pipeline, with skip/next pointers) so the site reads as a **linear tutorial** — the tool repos' own docs are left untouched/self-contained. Added `docs/translations.md`, a Greek ("Ελληνικά") "coming soon" page linked from Guides. Commit: "feat: linear intros + Greek translation stub".
-- **2026-10-10** — Iteration 6 (single-page guides): **MG Pipeline** and **HEP Software Environment** are now **one page each** (`mg-pipeline/guide.md`, `hep-software-environment/guide.md`) with an in-page **right sidebar** (TOC). Repo section headings demoted `#` → `##` so they appear in the TOC (an H1 is excluded by Material); `build_readme.py` now injects each repo's `README.md` title so GitHub is unchanged. Landing "Start here" is a **two-step list** (environment → pipeline) whose links point at **section anchors** (`…/guide/#apptainer-hpc`, `#docker`, `#troubleshooting`); old wrapper pages removed; nav flattened. Added a **site-only skip note** under the mg *Prerequisites* heading (via `--8<-- "prerequisites.md:1:1"` + note + `:2`). Commits: `mg-pipeline` `5f1d089`, `hep-pipeline-env` `dbb1d77`, site `82adf00` + `75cd795` + this one.
+- **2026-10-10** — Iteration 6 (single-page guides): **MG Pipeline** and **HEP Software Environment** are now **one page each** (`mg-pipeline/guide.md`, `hep-software-environment/guide.md`) with an in-page **right sidebar** (TOC). Repo section headings demoted `#` → `##` so they appear in the TOC (an H1 is excluded by Material). Landing "Start here" is a **two-step list** (environment → pipeline) whose links point at **section anchors** (`…/guide/#apptainer-hpc`, `#docker`, `#troubleshooting`); old wrapper pages removed; nav flattened. Added a **site-only skip note** under the mg *Prerequisites* heading.
+- **2026-10-10** — Iteration 7 (single source of truth): tool docs folded back into **one `README.md` per repo** (short intro → `## Contents` TOC → full guide), with invisible `--8<-- [start:x]` section markers for the site includes. **`docs/`, `scripts/build_readme.py` and `.githooks/` removed** from the tool repos (the hook needed per-clone `git config core.hooksPath` setup — not automatic — so the generated-README model could silently drift). `sync_sources.py` now copies `README.md`; the site guides include README sections. **Citing section now cites only the underlying tools** (removed "in addition to this repository"). Commits: `mg-pipeline` `a8d18e2`, `hep-pipeline-env` `c5a062a`, site `9085e90`.
 
 ## Steps
 
