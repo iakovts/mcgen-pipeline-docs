@@ -6,9 +6,9 @@ hide:
   - toc
 ---
 
-Welcome to the lab's documentation site. Use the cards above or the topic tabs
-to switch between sections.
+Everything here documents the group's tooling &mdash; the software environment
+and the pipeline driver. The topic tabs at the top lead to the same material.
 
 !!! info "Site under construction"
-    Pages currently contain placeholder outlines only — real content is landing
-    gradually. If you spot something missing, it is probably still on the list.
+    Tool documentation is pulled from the tool repositories at build time and
+    grows with them; some sections are still thin.

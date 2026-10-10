@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""Stage source-repo docs into ./sources/ for the Zensical build.
+"""Stage source-repo READMEs into ./sources/ for the Zensical build.
 
-Copies each source repo's docs/ directory into sources/<repo>/docs/ so that
-pymdownx.snippets can include it, and records each repo's commit SHA/date in
-sources/provenance.json (read by scripts/provenance.py). Run before
-`zensical serve` / `build`:
+Copies each source repo's README.md into sources/<repo>/README.md so that
+pymdownx.snippets can include its sections, and records each repo's commit
+SHA/date in sources/provenance.json (read by scripts/provenance.py). Run
+before `zensical serve` / `build`:
 
     python scripts/sync_sources.py
 
-Iteration 1: copies from sibling checkouts (../mg-pipeline-main,
-../hep-pipeline-env-main), falling back to ../mg-pipeline and
-../hep-pipeline-env. The CI workflow clones the repos into those sibling paths.
-(This layer is the swap point for git submodules later.)
+The READMEs are the single source of truth for tool docs (each repo is one
+big README with a table of contents). Copies from sibling checkouts
+(../mg-pipeline-main, ../hep-pipeline-env-main), falling back to
+../mg-pipeline and ../hep-pipeline-env. The CI workflow clones the repos into
+those sibling paths. (This layer is the swap point for git submodules later.)
 """
 
 from __future__ import annotations
@@ -50,22 +51,22 @@ def main() -> None:
     versions: dict[str, dict[str, str]] = {}
     for dest_name, candidates in REPOS.items():
         repo_dir = next(
-            (PARENT / c for c in candidates if (PARENT / c / "docs").is_dir()), None
+            (PARENT / c for c in candidates if (PARENT / c / "README.md").is_file()),
+            None,
         )
         if repo_dir is None:
-            print(f"!! no source docs found for {dest_name} (looked in: {', '.join(candidates)})")
+            print(f"!! no README.md found for {dest_name} (looked in: {', '.join(candidates)})")
             continue
-        src = repo_dir / "docs"
-        dest = SOURCES / dest_name / "docs"
+        dest = SOURCES / dest_name
         if dest.exists():
             shutil.rmtree(dest)
-        dest.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copytree(src, dest)
+        dest.mkdir(parents=True)
+        shutil.copy(repo_dir / "README.md", dest / "README.md")
         versions[dest_name] = {
             "sha": _git(repo_dir, "rev-parse", "--short", "HEAD"),
             "date": _git(repo_dir, "log", "-1", "--format=%cs"),
         }
-        print(f"synced {src} -> {dest}")
+        print(f"synced {repo_dir / 'README.md'} -> {dest / 'README.md'}")
     (SOURCES / "provenance.json").write_text(json.dumps(versions, indent=2) + "\n")
     print("wrote sources/provenance.json")
 

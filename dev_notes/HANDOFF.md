@@ -38,17 +38,19 @@ The **user runs all `zensical` commands**; the agent commits and verifies static
 Tool prose lives in **its own repo** (single source of truth); this repo only
 holds the site chrome, study guides, and thin wrapper pages.
 
-- Each tool repo keeps its content in `docs/*.md`. Its `README.md` is
-  **generated** from those by `scripts/build_readme.py` and auto-staged by the
-  shared pre-commit hook (`.githooks/pre-commit`, enabled once per clone with
-  `git config core.hooksPath .githooks`).
-- `scripts/sync_sources.py` copies each sibling repo's `docs/` into
-  `sources/<repo>/docs/` (gitignored) and records the commit SHA/date in
+- Each tool repo is **one big `README.md`** (short intro → `## Contents` TOC →
+  full guide): [mg-pipeline](https://github.com/iakovts/mg-pipeline),
+  [hep-pipeline-env](https://github.com/iakovts/hep-pipeline-env).
+  That README is the single source of truth — GitHub shows it; the site
+  includes it. No copies, no generator, no hooks: **drift is impossible**.
+- `scripts/sync_sources.py` copies each sibling repo's `README.md` into
+  `sources/<repo>/README.md` (gitignored) and records the commit SHA/date in
   `sources/provenance.json`.
-- Site pages under `docs/pipeline/` and `docs/mg-pipeline/` are **wrapper pages**:
+- Site pages under `docs/hep-software-environment/` and `docs/mg-pipeline/` are **wrapper pages**:
   a short "source" note (stamping `{{ mg_pipeline_sha }}` / `{{ hep_pipeline_env_sha }}`
   via the native `macros` plugin + `scripts/provenance.py`) followed by
-  `--8<-- "<repo>/docs/<file>.md"` (native `pymdownx.snippets`).
+  `--8<-- "<repo>/README.md:section"` (native `pymdownx.snippets`; sections are
+  bracketed by invisible `<!-- --8<-- [start:x] -->` markers in each README).
 - Only the included Markdown is rendered; `sources/` is never served raw.
 
 **Swap point:** this is a **copy** today (the tool repos are local/unpushed, so
@@ -70,7 +72,8 @@ runs the sync, then `zensical build --clean` and deploys to GitHub Pages.
   `\[ \]` or `$$` display. The MathJax runtime currently loads from unpkg —
   **temporary**; self-hosting/KaTeX is a planned revisit (plan item 13).
 - Landing page: `docs/index.md` uses `template: "homepage.html"` (front matter) →
-  `overrides/homepage.html` (MiniJinja, topic-card grid) + `docs/stylesheets/extra.css`.
+  `overrides/homepage.html` (MiniJinja; linear "Start here" path + topic cards)
+  + `docs/stylesheets/extra.css`.
 - Language: English only (`theme.language = "en"`); commented `extra.alternate`
   dropdown example ready for the eventual EN/EL split (one build per language,
   Greek under `/el/`).

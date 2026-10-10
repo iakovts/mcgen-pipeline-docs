@@ -6,35 +6,52 @@
 
 {% block content %}
 <section class="mg-hero">
-  <h1>MC Generation @ AUTH</h1>
+  <h1>MC generation pipeline quickstart</h1>
   <p>
-    Study guides, tool instructions, and documentation for the lab's
-    HEP and Monte Carlo pipelines.
+    Tool instructions and documentation for the group's HEP and Monte Carlo
+    pipelines.
   </p>
 </section>
 
-<div class="mg-cards">
-  <a class="mg-card" href="guides/study-guides/overview/">
-    <span class="mg-card-icon" aria-hidden="true">&#128214;</span>
-    <h2>Study guides</h2>
-    <p>Guides for courses, exams, and topics.</p>
-  </a>
-  <a class="mg-card" href="guides/tool-instructions/overview/">
-    <span class="mg-card-icon" aria-hidden="true">&#129518;</span>
-    <h2>Tool instructions</h2>
-    <p>Step-by-step instructions for common tools.</p>
-  </a>
-  <a class="mg-card" href="pipeline/overview/">
-    <span class="mg-card-icon" aria-hidden="true">&#128300;</span>
-    <h2>Pipeline</h2>
-    <p>hep-pipeline: setup, configuration, and running.</p>
-  </a>
-  <a class="mg-card" href="mg-pipeline/overview/">
-    <span class="mg-card-icon" aria-hidden="true">&#129514;</span>
-    <h2>MG Pipeline</h2>
-    <p>mg-pipeline: cards, CLI, stages, and known quirks.</p>
-  </a>
-</div>
+<h2 id="start-here">Start here</h2>
+
+<p>
+  Producing Monte Carlo events needs two things: the generators themselves
+  (MadGraph5_aMC@NLO, MadSpin, Pythia 8 and Rivet), and optionally something to help drive them
+  through the whole chain. This guide therefore comes in two stages — first set
+  up an environment that has the generators installed, then install and run the
+  pipeline that ties them together. If you already have the tools, you can skip
+  straight to the second stage.
+</p>
+
+<ol>
+  <li>
+    <strong>Get a software environment.</strong> If MadGraph, MadSpin, Pythia
+    and Rivet are not installed yet, set up the
+    <a href="hep-software-environment/guide/">HEP Software Environment</a>:
+    <ul>
+      <li>
+        on an HPC cluster with Apptainer (e.g. AUTh's Aristotle) —
+        <a href="hep-software-environment/guide/#apptainer-hpc">Apptainer guide</a>;
+      </li>
+      <li>
+        locally on Linux or WSL —
+        <a href="hep-software-environment/guide/#docker">Docker guide</a>.
+      </li>
+    </ul>
+  </li>
+  <li>
+    <strong>Install and run mg-pipeline.</strong> Once the environment is ready
+    (or if you already have one), follow the
+    <a href="mg-pipeline/guide/">mg-pipeline guide</a> to run your first
+    production.
+  </li>
+</ol>
+
+<p>
+  Something not working? See
+  <a href="hep-software-environment/guide/#troubleshooting">troubleshooting</a>.
+</p>
 
 {{ super() }}
 {% endblock %}

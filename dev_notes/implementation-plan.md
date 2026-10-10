@@ -11,13 +11,13 @@
 
 Goal: one site, source-of-truth prose in the tool repos, no drift.
 
-- Each tool repo keeps its prose in `docs/*.md`; its `README.md` is *generated*
-  from them (`scripts/build_readme.py`) and auto-staged via a committed
-  `.githooks/pre-commit` hook (`git config core.hooksPath .githooks`).
+- Each tool repo is **one big `README.md`** (short intro → `## Contents` TOC →
+  full guide) — the single source of truth for its docs. GitHub shows it; the
+  site includes it. No generator, no hooks: drift is impossible.
 - `scripts/sync_sources.py` copies each sibling repo's `docs/` into
   `sources/<repo>/docs/` (gitignored) and writes `sources/provenance.json`
   (commit SHA + date).
-- Site wrapper pages (`docs/pipeline/*`, `docs/mg-pipeline/*`) contain a source
+- Site wrapper pages (`docs/hep-software-environment/*`, `docs/mg-pipeline/*`) contain a source
   note (with `{{ mg_pipeline_sha }}` / `{{ hep_pipeline_env_sha }}` via the
   native `macros` plugin + `scripts/provenance.py`) and `--8<--` includes
   (`pymdownx.snippets`, `base_path = ["sources"]`, `check_paths = true`).
@@ -51,6 +51,12 @@ Goal: one site, source-of-truth prose in the tool repos, no drift.
 - **2026-10-09** — User run-verification passed (math + Mermaid render fine). Rendering checks added to `guides/study-guides/overview.md` and `pipeline/how-it-works.md`. Repo renamed `mg-docu-site` → **`mcgen-pipeline-docs`** (final; interim name `mcgen-auth-docs` discarded before first push; display title "MC Generation @ AUTH"). Remote URL updated; user handles folder rename.
 - **2026-10-10** — Content pipeline built (see “Content sync”): added `docs/` to both tool repos with a generated README + shared pre-commit hook; site pulls them via `scripts/sync_sources.py` + `pymdownx.snippets` + `macros` provenance; replaced the 12 placeholder pages with 9 wrapper pages; added `.github/workflows/docs.yml`; set the GitHub Pages `site_url`. Local `zensical build --clean --strict` → *No issues found*. Commits: tool repos `docs: add docs/ as single source; generate README from it`; site `feat: pull source-repo docs into site (snippets + provenance) and add Pages workflow`.
 - **Pending (user):** push both tool repos, merge site `dev` → `main`, enable Pages (Settings → Pages → Source: GitHub Actions).
+- **2026-10-10** — Iteration 2 (IA + docs): site `README.md` rewritten to explain the content model, `sync_sources.py`, and provenance. Section **"Pipeline" → "HEP Software Environment"** (folder `docs/pipeline/` → `docs/hep-software-environment/`, URLs follow). Landing page is now a **linear "Start here" path** (environment → mg-pipeline → guides) with the cards demoted to a "browse by topic" row; topic tabs reordered to match. Commit: "feat: linear learning path + HEP Software Environment section".
+- **2026-10-10** — Iteration 3 (landing page): hero → **"MC generation pipeline quickstart"**; the step-path cards replaced by a short orientation text (no env yet → start here; Apptainer vs Docker entry points; then mg-pipeline; troubleshooting). **"Browse by topic" removed**; **study guides dropped** from the site for now (nav entry + `docs/guides/study-guides/` removed; copy updated). Commit: "feat: simplify landing page to quickstart text".
+- **2026-10-10** — Iteration 4 (repo fixes): real `mg-pipeline` repo URL everywhere in hep-pipeline-env; auto-clone re-enabled then made **optional-but-default** (`CLONE_MG_PIPELINE=0` / `--no-mg-pipeline`); Mermaid diagram fixed for GitHub (no `<br/>`/`&amp;` in labels). Commits: `mg-pipeline` `87a9f76`, `hep-pipeline-env` `1ced309`, `fbcfe0b`.
+- **2026-10-10** — Iteration 5 (coherence + i18n groundwork): every wrapper page now carries a **site-authored step frame / intro** (Step 1 = environment, Step 2 = pipeline, with skip/next pointers) so the site reads as a **linear tutorial** — the tool repos' own docs are left untouched/self-contained. Added `docs/translations.md`, a Greek ("Ελληνικά") "coming soon" page linked from Guides. Commit: "feat: linear intros + Greek translation stub".
+- **2026-10-10** — Iteration 6 (single-page guides): **MG Pipeline** and **HEP Software Environment** are now **one page each** (`mg-pipeline/guide.md`, `hep-software-environment/guide.md`) with an in-page **right sidebar** (TOC). Repo section headings demoted `#` → `##` so they appear in the TOC (an H1 is excluded by Material). Landing "Start here" is a **two-step list** (environment → pipeline) whose links point at **section anchors** (`…/guide/#apptainer-hpc`, `#docker`, `#troubleshooting`); old wrapper pages removed; nav flattened. Added a **site-only skip note** under the mg *Prerequisites* heading.
+- **2026-10-10** — Iteration 7 (single source of truth): tool docs folded back into **one `README.md` per repo** (short intro → `## Contents` TOC → full guide), with invisible `--8<-- [start:x]` section markers for the site includes. **`docs/`, `scripts/build_readme.py` and `.githooks/` removed** from the tool repos (the hook needed per-clone `git config core.hooksPath` setup — not automatic — so the generated-README model could silently drift). `sync_sources.py` now copies `README.md`; the site guides include README sections. **Citing section now cites only the underlying tools** (removed "in addition to this repository"). Commits: `mg-pipeline` `a8d18e2`, `hep-pipeline-env` `c5a062a`, site `9085e90`.
 
 ## Steps
 
@@ -96,6 +102,8 @@ Goal: one site, source-of-truth prose in the tool repos, no drift.
 
 ## Decisions
 
+- **Greek translation — DEFERRED (2026-10-10).** Deferred to a later phase. Design captured for when we do it: Greek sources live in the **tool repos** under `docs/el/` (mirroring `docs/`; flows through `sync_sources.py` automatically). The site gets a `docs-el/` tree (Greek landing + Greek wrappers) and a **second config** `zensical.el.toml` (`language = "el"`, `docs_dir = "docs-el"`, `site_dir = "site/el"`); a `scripts/build_site.py` runs the EN build → `site/` then the EL build → `site/el/` (order matters: EL's clean must not wipe EN). Layout: **EN default at root, EL under `/el/`**; `[project.extra].alternate` dropdown in both configs. Greek **theme translations (`el`) are already complete**, so only content needs translating; estimated effort ≈ the tech (small) + translating all pages (the bulk). Until then, `docs/translations.md` announces it. Also: `overrides/homepage.html` is English-hardcoded and needs a Greek variant when we get there.
+
 - **Built-ins only (user, 2026-10-09): no added packages, no vendored JS.** Mermaid is native to Zensical (auto runtime). Math = `pymdownx.arithmatex` + MathJax per Zensical's official recipe, with the runtime on unpkg **temporarily** — the only external reference in the project; self-hosting or KaTeX is a Phase-4 revisit (user: math "might change later"). All math written as `\( \)` inline / `\[ \]` or `$$` display so any renderer swap is syntax-compatible.
 - **Plain Python venv, no Docker** (user). The Docker-only rule applies to npm/Node projects only. `site/` static output is the deliverable; the user runs `zensical` themselves.
 - **`zensical.toml` native config** + **new design theme** (the `classic` Material look is a one-line A/B). MkDocs fallback = mechanical `zensical.toml` → `mkdocs.yml` conversion + `mkdocs-material` in the same venv.
@@ -121,7 +129,7 @@ Goal: one site, source-of-truth prose in the tool repos, no drift.
 - `docs/stylesheets/extra.css`, `docs/javascripts/mathjax.js`.
 - **Content sync:** `scripts/sync_sources.py`, `scripts/provenance.py`,
   `.github/workflows/docs.yml`, `sources/` (gitignored).
-- Wrapper pages: `docs/pipeline/{overview,apptainer,docker,running-the-pipeline,troubleshooting}.md`,
+- Wrapper pages: `docs/hep-software-environment/{overview,apptainer,docker,running-the-pipeline,troubleshooting}.md`,
   `docs/mg-pipeline/{overview,prerequisites,usage,disclaimer}.md`.
 - Study guides / tool instructions: `docs/guides/`; test page: `docs/smoke-test.md`.
 - `dev_notes/implementation-plan.md` (this file), `dev_notes/HANDOFF.md`.
