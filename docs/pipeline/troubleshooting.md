@@ -1,13 +1,4 @@
-# Troubleshooting
+!!! info "Source"
+    Pulled from [hep-pipeline-env](https://github.com/iakovts/hep-pipeline-env) at commit `{{ hep_pipeline_env_sha }}` ({{ hep_pipeline_env_date }}). Edit the source repo, not this page.
 
-Common failure modes and how to fix them.
-
-!!! note "TODO — content pending"
-    Placeholder outline. Real content lands in a later phase.
-
-## Outline
-
-- Frequent errors
-- Environment issues
-- Where to find logs
-- How to report a problem
+--8<-- "hep-pipeline-env/docs/troubleshooting.md"

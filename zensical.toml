@@ -3,7 +3,7 @@
 
 [project]
 site_name = "MC Generation @ AUTH"
-site_url = "https://example.com" # TODO: real production URL (Plesk origin)
+site_url = "https://iakovts.github.io/mcgen-pipeline-docs/" # GitHub Pages (interim); switch to the Plesk origin later
 site_description = "Documentation for the lab's Monte Carlo event-generation tooling (MadGraph → MadSpin → Pythia → Rivet), plus study guides and tool instructions."
 docs_dir = "docs"
 site_dir = "site"
@@ -26,20 +26,16 @@ nav = [
   ] },
   { "Pipeline" = [
     { "Overview" = "pipeline/overview.md" },
-    { "Getting started" = "pipeline/getting-started.md" },
-    { "Configuration" = "pipeline/configuration.md" },
-    { "How it works" = "pipeline/how-it-works.md" },
-    { "Running" = "pipeline/running.md" },
+    { "Apptainer (HPC)" = "pipeline/apptainer.md" },
+    { "Docker" = "pipeline/docker.md" },
+    { "Running the pipeline" = "pipeline/running-the-pipeline.md" },
     { "Troubleshooting" = "pipeline/troubleshooting.md" },
   ] },
   { "MG Pipeline" = [
     { "Overview" = "mg-pipeline/overview.md" },
-    { "Quickstart" = "mg-pipeline/quickstart.md" },
-    { "Card formats" = "mg-pipeline/card-formats.md" },
-    { "CLI reference" = "mg-pipeline/cli-reference.md" },
-    { "Stage reference" = "mg-pipeline/stage-reference.md" },
-    { "Known quirks" = "mg-pipeline/known-quirks.md" },
-    { "Extending" = "mg-pipeline/extending.md" },
+    { "Prerequisites" = "mg-pipeline/prerequisites.md" },
+    { "Usage" = "mg-pipeline/usage.md" },
+    { "Disclaimer" = "mg-pipeline/disclaimer.md" },
   ] },
 ]
 
@@ -94,3 +90,12 @@ pymdownx.arithmatex.generic = true
 pymdownx.superfences.custom_fences = [
   { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
 ]
+
+# Include source-repo docs staged under sources/ (see scripts/sync_sources.py).
+# check_paths makes a missing snippet fail the build (good with --strict).
+pymdownx.snippets.base_path = ["sources"]
+pymdownx.snippets.check_paths = true
+
+# Native macros plugin: provides provenance variables (scripts/provenance.py).
+[project.plugins.macros]
+module_name = "scripts/provenance"

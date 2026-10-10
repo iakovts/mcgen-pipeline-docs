@@ -4,3 +4,6 @@
 # Build output / caches
 site/
 .cache/
+
+# Staged source-repo docs (populated by scripts/sync_sources.py)
+sources/
